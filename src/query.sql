@@ -34,7 +34,7 @@ insert into driverdetails(drivername,name,password,age,gender,email,carmodel,tot
 
 
 CREATE TABLE stops(
-sid int primary key not null default 101 auto_increment,
+sid int primary key not null auto_increment default 101,
 name varchar(30),
 distance int
 );
