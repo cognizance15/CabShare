@@ -11,24 +11,32 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.cabshare.entity.User;
 import com.cabshare.service.UserService;
 
-@Controller(value="UserController")
+@Controller
 public class UserController {
 
 	@Autowired
 	@Qualifier("userService")
 	private UserService userService;
 	
+	@RequestMapping(value="/register.htm")
+	public String goToregister(){
+		System.out.println("UserController.goToregister()");
+		return "register";
+	}
+	
 	@RequestMapping(value="/save.htm", method=RequestMethod.POST)
 	public String save(@RequestParam("name") String name, 
 						@RequestParam("username") String username, 
 						@RequestParam("password") String password,
 						@RequestParam("email") String email,
-						@RequestParam("mobNo") int mobNo,
 						@RequestParam("age") int age,
 						@RequestParam("gender") String gender,
+						@RequestParam("mobile") int mobile,
 						Model model){
+		System.out.println("UserController.save()");
 		//default annotation handler mapping will pass this request
-		User user = new User(name, username, password, email, mobNo, age, gender);
+		User user = new User(name, username, password, email, mobile, age, gender);
+		System.out.println(user);
 		userService.register(user);
 		model.addAttribute("user", user);
 		return "save";

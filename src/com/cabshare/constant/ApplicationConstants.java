@@ -2,7 +2,9 @@ package com.cabshare.constant;
 
 public class ApplicationConstants {
 
-	public static final String INSERT_INTO_USER_DETAILS="insert into userDetails values(:name,:username,:age,:gender,:email,:password,:mobNo)";
+	public static final String INSERT_INTO_USER_DETAILS="insert into userDetails"
+			+ "(name,username, password,age,gender,email,mobile)"
+			+ " values(?,?,?,?,?,?,?)";
 	
 	public static final String USER_LOGIN_CHECK = "select count(*) from userDetails where username=:username and password=:password";
 	

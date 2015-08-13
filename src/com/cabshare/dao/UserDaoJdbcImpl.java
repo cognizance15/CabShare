@@ -11,7 +11,7 @@ import static com.cabshare.constant.ApplicationConstants.*;
 
 import com.cabshare.entity.User;
 
-@Repository
+@Repository(value="userDao")
 public class UserDaoJdbcImpl implements UserDao {
 
 	@Autowired
@@ -21,6 +21,7 @@ public class UserDaoJdbcImpl implements UserDao {
 	public boolean register(User user) {
 
 		try{
+			/*
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("name", user.getName());
 			params.put("username", user.getUsername());
@@ -29,7 +30,10 @@ public class UserDaoJdbcImpl implements UserDao {
 			params.put("gender", user.getGender());
 			params.put("email", user.getEmail());
 			params.put("mobNo", user.getMobNo());
-			jdbcTemplate.update(INSERT_INTO_USER_DETAILS, params);
+			*/
+			jdbcTemplate.update(INSERT_INTO_USER_DETAILS, new Object[]{
+					user.getName(),user.getUsername(), user.getPassword(),
+					user.getAge(),user.getGender(),user.getEmail(),user.getMobNo()});
 			return true;
 		}catch(Exception e){
 			e.printStackTrace();
