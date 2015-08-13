@@ -5,7 +5,6 @@ password varchar(50),
 age int,
 gender varchar(50),
 email varchar(50),
-
 mobile BIGINT(10)
 );
 insert into userdetails(name,username,password,age,gender,email,mobile) values("Danish","Danish123","Danish123",22,"MALE","tux.danish@gmail.com",8826296990);
@@ -18,46 +17,43 @@ insert into userdetails(name,username,password,age,gender,email,mobile) values("
 
 CREATE TABLE driverdetails(
 drivername varchar(50) PRIMARY KEY,
+name varchar(50),
+password varchar(50),
+age int,
+gender varchar(50),
+email varchar(50),
 carmodel varchar(50),
 totalseats int,
-seatavail int,
 drivercontact BIGINT(10)
 );
-insert into driverdetails(drivername,carmodel,totalseats,seatavail,drivercontact) values("Mayank kumar","Audi A6",5,3,9988223312);
-insert into driverdetails(drivername,carmodel,totalseats,seatavail,drivercontact) values("Mayank Rathi","Audi A4",5,5,9929944112);
-insert into driverdetails(drivername,carmodel,totalseats,seatavail,drivercontact) values("Mayank gupta","BMW SX",5,1,9003311772);
-insert into driverdetails(drivername,carmodel,totalseats,seatavail,drivercontact) values("Mayank Lohani","Gallardo A9",5,2,9883377112);
+insert into driverdetails(drivername,name,password,age,gender,email,carmodel,totalseats,seatavail,drivercontact) values("Mayank kumar","mayank1234","22","M","mayank.kumar@gmail.com","Audi A6",5,3,9988223312);
+insert into driverdetails(drivername,name,password,age,gender,email,carmodel,totalseats,seatavail,drivercontact) values("Mayank Rathi","mayank1234","22","M","mayank.rathi@gmail.com","Audi A4",5,5,9929944112);
+insert into driverdetails(drivername,name,password,age,gender,email,carmodel,totalseats,seatavail,drivercontact) values("Mayank gupta","mayank1234","22","M","mayank.gupta@gmail.com","BMW SX",5,1,9003311772);
+insert into driverdetails(drivername,name,password,age,gender,email,carmodel,totalseats,seatavail,drivercontact) values("Mayank Lohani","mayank1234","22","M","mayank.lohani@gmail.com","Gallardo A9",5,2,9883377112);
 
 
 
-CREATE TABLE route(
-rid int,
-start varchar(5),
-end varchar(5)
+CREATE TABLE stops(
+sid int primary key not null default 101 auto_increment,
+name varchar(30),
+distance int
 );
-insert into route(rid,start,end) values(100,"A1","A2");
-insert into route(rid,start,end) values(101,"A2","A3");
-insert into route(rid,start,end) values(102,"A3","A4");
-insert into route(rid,start,end) values(103,"A4","A5");
-insert into route(rid,start,end) values(104,"A5","A6");
-
-
-
-
-CREATE TABLE cabride(
-FOREIGN KEY (drivername) REFERENCES driverdetails(drivername),
-crid int,
-source varchar(25),
-destination varchar(25)	
-);
-
-
+insert into stops(name, distance) values("Jahangirpuri", 2);
+insert into stops(name, distance) values("Kashmiri Gate", 5);
+insert into stops(name, distance) values("Rajiv Chowk", 7);
+insert into stops(name, distance) values("Central Secretariat", 10);
+insert into stops(name, distance) values("Qutab Minar", 11);
+insert into stops(name, distance) values("Huda City Center", 21);
 
 CREATE TABLE userride(
-FOREIGN KEY (username) REFERENCES userdetails(username),
-FOREIGN KEY (crid) REFERENCES cabride(crid),
-source varchar(50),
-destination varchar(50),
+urid int primary key not null auto_increment,		#On Take/Join Ride
+FOREIGN KEY (username) REFERENCES userdetails(username),	#On Take/Join Ride
+FOREIGN KEY (source) REFERENCES stops(sid),
+FOREIGN KEY (destination) REFERENCES stops(sid),
+shareable boolean,
+size int,
+FOREIGN KEY (drivername) REFERENCES driverdetails(drivername),	#On Take/Join Ride
+FOREIGN KEY (location) REFERENCES stops(sid),
 fare int
 );
 
