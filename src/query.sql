@@ -26,10 +26,10 @@ carmodel varchar(50),
 totalseats int,
 drivercontact BIGINT(10)
 );
-insert into driverdetails(drivername,name,password,age,gender,email,carmodel,totalseats,seatavail,drivercontact) values("mkumar","Mayank kumar","mayank1234","22","M","mayank.kumar@gmail.com","Audi A6",5,3,9988223312);
-insert into driverdetails(drivername,name,password,age,gender,email,carmodel,totalseats,seatavail,drivercontact) values("mrathi","Mayank Rathi","mayank1234","22","M","mayank.rathi@gmail.com","Audi A4",5,5,9929944112);
-insert into driverdetails(drivername,name,password,age,gender,email,carmodel,totalseats,seatavail,drivercontact) values("mgupta","Mayank gupta","mayank1234","22","M","mayank.gupta@gmail.com","BMW SX",5,1,9003311772);
-insert into driverdetails(drivername,name,password,age,gender,email,carmodel,totalseats,seatavail,drivercontact) values("mlohani","Mayank Lohani","mayank1234","22","M","mayank.lohani@gmail.com","Gallardo A9",5,2,9883377112);
+insert into driverdetails(drivername,name,password,age,gender,email,carmodel,totalseats,drivercontact) values("mkumar","Mayank kumar","mayank1234","22","M","mayank.kumar@gmail.com","Audi A6",5,9988223312);
+insert into driverdetails(drivername,name,password,age,gender,email,carmodel,totalseats,drivercontact) values("mrathi","Mayank Rathi","mayank1234","22","M","mayank.rathi@gmail.com","Audi A4",5,9929944112);
+insert into driverdetails(drivername,name,password,age,gender,email,carmodel,totalseats,drivercontact) values("mgupta","Mayank gupta","mayank1234","22","M","mayank.gupta@gmail.com","BMW SX",5,9003311772);
+insert into driverdetails(drivername,name,password,age,gender,email,carmodel,totalseats,drivercontact) values("mlohani","Mayank Lohani","mayank1234","22","M","mayank.lohani@gmail.com","Gallardo A9",5,9883377112);
 
 
 
