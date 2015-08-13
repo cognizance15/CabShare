@@ -56,4 +56,3 @@ FOREIGN KEY (drivername) REFERENCES driverdetails(drivername),	#On Take/Join Rid
 FOREIGN KEY (location) REFERENCES stops(sid),
 fare int
 );
-
