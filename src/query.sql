@@ -34,11 +34,11 @@ insert into driverdetails(drivername,name,password,age,gender,email,carmodel,tot
 
 
 CREATE TABLE stops(
-sid int primary key not null auto_increment default 101,
+sid int primary key not null auto_increment,
 name varchar(30),
 distance int
 );
-insert into stops(name, distance) values("Jahangirpuri", 2);
+insert into stops(sid, name, distance) values(101, "Jahangirpuri", 2);
 insert into stops(name, distance) values("Kashmiri Gate", 5);
 insert into stops(name, distance) values("Rajiv Chowk", 7);
 insert into stops(name, distance) values("Central Secretariat", 10);
@@ -47,12 +47,17 @@ insert into stops(name, distance) values("Huda City Center", 21);
 
 CREATE TABLE userride(
 urid int primary key not null auto_increment,		#On Take/Join Ride
+username varchar(50),
 FOREIGN KEY (username) REFERENCES userdetails(username),	#On Take/Join Ride
+source int,
 FOREIGN KEY (source) REFERENCES stops(sid),
+destination int,
 FOREIGN KEY (destination) REFERENCES stops(sid),
 shareable boolean,
 size int,
+drivername varchar(50),
 FOREIGN KEY (drivername) REFERENCES driverdetails(drivername),	#On Take/Join Ride
+location int,
 FOREIGN KEY (location) REFERENCES stops(sid),
 fare int
 );
