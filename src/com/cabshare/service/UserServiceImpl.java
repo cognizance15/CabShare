@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 import com.cabshare.dao.UserDao;
 import com.cabshare.entity.User;
 
-@Service(value="userService")
+@Service("userService")
 public class UserServiceImpl implements UserService{
 
 	@Autowired
-	@Qualifier(value="userDao")
+	@Qualifier("userDao")
 	UserDao userDao;
 	
 	@Override
