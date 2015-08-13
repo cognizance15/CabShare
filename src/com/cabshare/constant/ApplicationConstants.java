@@ -1,4 +1,4 @@
-package com.cabShare.constant;
+package com.cabshare.constant;
 
 public class ApplicationConstants {
 

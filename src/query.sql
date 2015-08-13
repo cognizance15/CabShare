@@ -21,7 +21,7 @@ drivername varchar(50) PRIMARY KEY,
 carmodel varchar(50),
 totalseats int,
 seatavail int,
-drivercontact BIGINT
+drivercontact BIGINT(10)
 );
 insert into driverdetails(drivername,carmodel,totalseats,seatavail,drivercontact) values("Mayank kumar","Audi A6",5,3,9988223312);
 insert into driverdetails(drivername,carmodel,totalseats,seatavail,drivercontact) values("Mayank Rathi","Audi A4",5,5,9929944112);

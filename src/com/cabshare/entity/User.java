@@ -1,4 +1,4 @@
-package com.cabShare.entity;
+package com.cabshare.entity;
 
 public class User {
 

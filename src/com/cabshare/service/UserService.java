@@ -1,6 +1,6 @@
-package com.cabShare.service;
+package com.cabshare.service;
 
-import com.cabShare.entity.User;
+import com.cabshare.entity.User;
 
 public interface UserService {
 

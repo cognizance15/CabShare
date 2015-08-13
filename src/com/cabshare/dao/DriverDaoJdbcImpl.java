@@ -12,12 +12,7 @@ public class DriverDaoJdbcImpl implements DriverDao {
 		return false;
 	}
 
-	@Override
-	public boolean login(Map<String, String> userdetails) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 	@Override
 	public boolean changePassword(String username, String password) {
 		// TODO Auto-generated method stub
@@ -44,6 +39,18 @@ public class DriverDaoJdbcImpl implements DriverDao {
 
 	@Override
 	public boolean endRide(User user) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean login(String uname, String password) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean validateUsername(String username) {
 		// TODO Auto-generated method stub
 		return false;
 	}
