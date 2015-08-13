@@ -6,7 +6,7 @@ public class PassengerDaoJdbcImpl extends UserDaoJdbcImpl implements PassengerDa
 
 	@Override
 	public boolean joinRide(User user) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
