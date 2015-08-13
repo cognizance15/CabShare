@@ -1,5 +1,10 @@
 package com.cabshare.service;
 
-public class PassengerService {
+import com.cabshare.entity.User;
 
+public interface PassengerService extends UserService{
+	public boolean joinRide(User user);
+	public boolean takeRide(User user);
+	public boolean updateFare(User user);
+	
 }

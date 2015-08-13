@@ -1,8 +1,10 @@
 package com.cabshare.dao;
 
+import com.cabshare.entity.User;
+
 public interface PassengerDao extends UserDao{
-	boolean  joinRide();
-	boolean  takeRide();
-	boolean updateFare();
+	public boolean  joinRide(User user);
+	public boolean  takeRide(User user);
+	public boolean updateFare(User user);
 	
 }
