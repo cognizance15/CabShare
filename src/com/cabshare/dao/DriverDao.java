@@ -1,9 +1,10 @@
 package com.cabshare.dao;
 
+import com.cabshare.entity.Driver;
 import com.cabshare.entity.User;
 
 public interface DriverDao extends UserDao{
-	boolean beginRide(User user);
-	boolean endRide(User user);
-	boolean setPosition(String position);
+	boolean beginRide(User user, Driver driver);
+	boolean endRide(User user, Driver driver);
+	boolean setPosition(String position, Driver driver);
 }
