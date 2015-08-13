@@ -52,6 +52,7 @@ public class UserController {
 		boolean status = userService.login(username, password);
 		//default annotation handler mapping will pass this request
 		if(status){
+			model.addAttribute("username", username);
 			return "homepage";
 		}
 		model.addAttribute("loginStatus", false);
