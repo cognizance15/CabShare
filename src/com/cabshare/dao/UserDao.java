@@ -1,6 +1,6 @@
-package com.cabShare.dao;
+package com.cabshare.dao;
 
-import com.cabShare.entity.User;
+import com.cabshare.entity.User;
 
 public interface UserDao {
 

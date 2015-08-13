@@ -1,10 +1,8 @@
 package com.cabshare.dao;
 
-import java.util.Map;
-
 import com.cabshare.entity.User;
 
-public class DriverDaoJdbcImpl implements DriverDao {
+public class DriverDaoJdbcImpl extends UserDaoJdbcImpl implements DriverDao{
 
 	@Override
 	public boolean register(User user) {
@@ -13,7 +11,7 @@ public class DriverDaoJdbcImpl implements DriverDao {
 	}
 
 	@Override
-	public boolean login(Map<String, String> userdetails) {
+	public boolean login(String username, String password) {
 		// TODO Auto-generated method stub
 		return false;
 	}
