@@ -37,9 +37,26 @@ public class UserController {
 		//default annotation handler mapping will pass this request
 		User user = new User(name, username, password, email, mobile, age, gender);
 		System.out.println(user);
-		userService.register(user);
-		model.addAttribute("user", user);
-		return "save";
+		if(userService.register(user)){
+			return "homepage";
+		}
+		model.addAttribute("saveStatus", false);
+		return "register";
 	}
+	
+	@RequestMapping(value="/checkLogin.htm", method=RequestMethod.POST)
+	public String goToLogin(@RequestParam("username") String username, 
+						@RequestParam("password") String password,
+						Model model){
+		System.out.println("UserController.goToLogin()");
+		boolean status = userService.login(username, password);
+		//default annotation handler mapping will pass this request
+		if(status){
+			return "homepage";
+		}
+		model.addAttribute("loginStatus", false);
+		return "login"; 
+	}
+	
 	
 }

@@ -45,10 +45,8 @@ public class UserDaoJdbcImpl implements UserDao {
 	public boolean login(String username, String password) {
 
 		try{
-			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("username", username);
-			params.put("password", password);
-			int count = jdbcTemplate.queryForInt(USER_LOGIN_CHECK, params);
+			int count = jdbcTemplate.queryForInt(USER_LOGIN_CHECK, new Object[]{username,password});
+			System.out.println(count);
 			if(count==1)
 				return true;
 		}catch(Exception e){
@@ -61,10 +59,7 @@ public class UserDaoJdbcImpl implements UserDao {
 	public boolean changePassword(String username, String password) {
 
 		try{
-			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("username", username);
-			params.put("password", password);
-			jdbcTemplate.update(CHANGE_PASSWORD, params);
+			jdbcTemplate.update(CHANGE_PASSWORD, new Object[]{username,password});
 			return true;
 		}catch(Exception e){
 			e.printStackTrace();

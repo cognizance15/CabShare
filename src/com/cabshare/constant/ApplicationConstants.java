@@ -6,11 +6,11 @@ public class ApplicationConstants {
 			+ "(name,username, password,age,gender,email,mobile)"
 			+ " values(?,?,?,?,?,?,?)";
 	
-	public static final String USER_LOGIN_CHECK = "select count(*) from userDetails where username=:username and password=:password";
+	public static final String USER_LOGIN_CHECK = "select count(*) from userDetails where username=? and password=?";
 	
-	public static final String VALIDATE_USERNAME = "select count(*) from userDetails where username=:username";
+	public static final String VALIDATE_USERNAME = "select count(*) from userDetails where username=?";
 	
-	public static final String CHANGE_PASSWORD = "update userDetails set password=:password where username=:username)";
+	public static final String CHANGE_PASSWORD = "update userDetails set password=:password where username=?)";
 	
-	public static final String CHECK_USERNAME = "select count(*) from userDetails where username=:username";
+	public static final String CHECK_USERNAME = "select count(*) from userDetails where username=?";
 }
