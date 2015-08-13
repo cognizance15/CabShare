@@ -18,8 +18,12 @@ public class DriverDaoJdbcImpl extends UserDaoJdbcImpl implements DriverDao{
 	}
 
 	@Override
-	public boolean setPosition(String position, Driver driver) {
-		
+	public boolean nextPosition(String position, Driver driver) {
+		try {
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		return false;
 	}
 }
