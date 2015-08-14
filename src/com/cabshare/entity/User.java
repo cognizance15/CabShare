@@ -9,6 +9,7 @@ public class User {
 	private int mobNo;
 	private int age;
 	private String gender;
+	private String type;
 	
 	public User() {
 		// TODO Auto-generated constructor stub
@@ -90,6 +91,16 @@ public class User {
 		return "User [name=" + name + ", username=" + username + ", password="
 				+ password + ", email=" + email + ", mobNo=" + mobNo + ", age="
 				+ age + ", gender=" + gender + "]";
+	}
+
+
+	public String getType() {
+		return type;
+	}
+
+
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 }
