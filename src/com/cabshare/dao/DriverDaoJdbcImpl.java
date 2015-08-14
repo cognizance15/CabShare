@@ -89,6 +89,33 @@ public class DriverDaoJdbcImpl extends UserDaoJdbcImpl implements DriverDao{
 	public boolean setPosition(int position, Driver driver) {
 		try {
 			jdbcTemplate.update(DRIVER_SET_LOCATION, new Object[]{position, driver.getSeats(), driver.getUsername()});
+//			//Query for available seats
+//			seatsAvailable = jdbcTemplate.queryForInt(DRIVER_GET_AVAILABLE_SEATS, new Object[]{driver.getUsername()});
+			//Adding passengers
+			int seatsAvailable = driver.getSeats();
+			if (seatsAvailable > 0 /*&& seatsAvailable == driver.getSeats()*/) {   //Confused entity. Shareable???
+				int passengerCount = jdbcTemplate.queryForInt(DRIVER_CHECK_WAITING_PASSENGERS, new Object[]{position, seatsAvailable});
+				if (passengerCount > 0) {
+					//FCFS
+					List<Map<String, Object>> rows = jdbcTemplate.queryForList(DRIVER_COUNT_PASSENGER_SIZE, new Object[]{position, seatsAvailable});
+					for (Map<String, Object> row : rows) {						
+						int urid = Integer.parseInt(String.valueOf(row.get("urid")));
+						int size = Integer.parseInt(String.valueOf(row.get("size")));
+						
+						if (seatsAvailable >= size) {
+						
+							if (seatsAvailable == driver.getSeats()) {	//New Ride
+								jdbcTemplate.update(DRIVER_NEW_RIDE, new Object[]{position, driver.getUsername()});
+							}
+							jdbcTemplate.update(DRIVER_UPDATE_SEATS, new Object[]{seatsAvailable - size, driver.getUsername()});
+							seatsAvailable -= size;
+							jdbcTemplate.update(DRIVER_UPDATE_USER, new Object[]{driver.getUsername(), position, urid});
+						}
+					}
+
+				}
+				
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
