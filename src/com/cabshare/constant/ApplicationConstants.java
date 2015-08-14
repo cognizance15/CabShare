@@ -25,7 +25,9 @@ public class ApplicationConstants {
 	
 	public static final String CHECK_USERNAME = "select count(*) from userDetails where username=?";
 
-	public static final String DRIVER_NEXT_LOCATION = "update cabride set location=? where drivername=? and fare=0";
+	public static final String DRIVER_NEXT_LOCATION = "update cabride set location=? where drivername=?";
+	
+	public static final String DRIVER_SET_LOCATION = "update cabride set location=?, source=NULL, destination=NULL, shareable=NULL, seatsavailable=? where drivername=?";
 	
 	public static final String DRIVER_GET_AVAILABLE_SEATS = "select seatsavailable from cabride where drivername=?";
 	
