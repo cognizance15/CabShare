@@ -9,9 +9,11 @@ public class ApplicationConstants {
 	public static final String UPDATE_DETAILS = "update userDetails set name=?, age=?, gender=?, mobile=?"
 			+ " where username=?";
 
-public static final int FARE_RATE = 10;
+	public static final int FARE_RATE = 10;
 	
+	public static final String GET_ALL_STOPS = "select sid from stops";
 	
+	public static final String GET_RIDE_INFO = "select * from cabride where drivername=?";
 	
 	public static final String INSERT_INTO_USER_RIDE="insert into userride"
 			+ "(username,source,destination,shareable,size)"
@@ -50,4 +52,6 @@ public static final int FARE_RATE = 10;
 	public static final String GET_STOP_DETAILS = "select distance from stops where sid=?";
 	
 	public static final String DRIVER_UPDATE_USER_FARE = "update userride set fare=? where urid=?";
+	
+	public static final String GET_LAST_STOP = "select * from stops where urid=(select MAX(sid) from stops)";
 }

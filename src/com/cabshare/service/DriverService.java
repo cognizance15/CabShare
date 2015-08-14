@@ -1,31 +1,14 @@
 package com.cabshare.service;
 
-import com.cabshare.dao.DriverDaoJdbcImpl;
+import java.util.List;
+import java.util.Map;
+
 import com.cabshare.entity.Driver;
 
-public class DriverService {
-	private DriverDaoJdbcImpl driverDaoJdbcImpl;
-	public DriverService() {
-		driverDaoJdbcImpl = new DriverDaoJdbcImpl();
-	}
+public interface DriverService {
 
-	public boolean nextPosition(int position, Driver driver) {
-		try {
-			driverDaoJdbcImpl.nextPosition(position, driver);
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();;
-		}
-		return false;
-	}
-	
-	public boolean setPosition(int position, Driver driver) {
-		try {
-			driverDaoJdbcImpl.setPosition(position, driver);
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();;
-		}
-		return false;
-	}
+	public boolean nextPosition(int position, Driver driver);
+	public boolean setPosition(int position, Driver driver);
+	public List<Map<String, Object>> getStops();
+	public List<Map<String, Object>> getRideInfo(Driver driver);
 }

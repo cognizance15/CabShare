@@ -7,9 +7,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.cabshare.entity.Driver;
 
+@Repository(value="driverDao")
 public class DriverDaoJdbcImpl extends UserDaoJdbcImpl implements DriverDao{
 
 	@Autowired
@@ -92,4 +94,17 @@ public class DriverDaoJdbcImpl extends UserDaoJdbcImpl implements DriverDao{
 		}
 		return false;
 	}
+	
+	@Override
+	public List<Map<String, Object>> getStops() {
+
+		List<Map<String, Object>> allStops = jdbcTemplate.queryForList(GET_ALL_STOPS);
+		return allStops;
+	}
+
+	public List<Map<String, Object>> getRideInfo(Driver driver) {
+		List<Map<String, Object>> rides = jdbcTemplate.queryForList(GET_RIDE_INFO, new Object[]{driver.getUsername()});
+		return rides;
+	}
+
 }
