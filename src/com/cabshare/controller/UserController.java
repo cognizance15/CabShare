@@ -168,5 +168,9 @@ public class UserController {
 		return "homepage"; 
 	}
 	
-	
+	@RequestMapping(value="/driverAction.htm", method=RequestMethod.POST)
+	public String driverAction(){
+		
+		return null;
+	}
 }
