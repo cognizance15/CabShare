@@ -36,7 +36,7 @@ public class DriverDaoJdbcImpl extends UserDaoJdbcImpl implements DriverDao{
 			jdbcTemplate.update(DRIVER_NEXT_LOCATION, new Object[]{position, driver.getUsername()});
 			
 			//Query for available seats
-			int seatsAvailable = jdbcTemplate.queryForInt(DRIVER_GET_AVAILABLE_SEATS, new Object[]{position, driver.getUsername()});
+			int seatsAvailable = jdbcTemplate.queryForInt(DRIVER_GET_AVAILABLE_SEATS, new Object[]{driver.getUsername()});
 			//Adding passengers
 			if (seatsAvailable > 0 /*&& seatsAvailable == driver.getSeats()*/) {   //Confused entity. Shareable???
 				int passengerCount = jdbcTemplate.queryForInt(DRIVER_CHECK_WAITING_PASSENGERS, new Object[]{position, seatsAvailable});
@@ -70,19 +70,19 @@ public class DriverDaoJdbcImpl extends UserDaoJdbcImpl implements DriverDao{
 				List<Map<String, Object>> rows = jdbcTemplate.queryForList(DRIVER_PASSENGERS_LEAVING, new Object[]{position, driver.getUsername()});
 				for (Map<String, Object> row : rows) {						
 					int urid = Integer.parseInt(String.valueOf(row.get("urid")));
+					String passenger = String.valueOf(row.get("username"));
+					int source = Integer.parseInt(String.valueOf(row.get("source")));
 					int size = Integer.parseInt(String.valueOf(row.get("size")));
-					int urid = Integer.parseInt(String.valueOf(row.get("urid")));
-					int urid = Integer.parseInt(String.valueOf(row.get("urid")));
 					
-					if (seatsAvailable >= size) {
+					int seatsShared = driver.getSeats() - jdbcTemplate.queryForInt(DRIVER_GET_AVAILABLE_SEATS, new Object[]{driver.getUsername()});
 					
-						if (seatsAvailable == driver.getSeats()) {	//New Ride
-							jdbcTemplate.update(DRIVER_NEW_RIDE, new Object[]{position, driver.getUsername()});
-						}
-						jdbcTemplate.update(DRIVER_UPDATE_SEATS, new Object[]{seatsAvailable - size, driver.getUsername()});
-						seatsAvailable -= size;
-						jdbcTemplate.update(DRIVER_UPDATE_USER, new Object[]{driver.getUsername(), position, urid});
-					}
+					//Querying distances
+					int sourceDistance = jdbcTemplate.queryForInt(GET_STOP_DETAILS, new Object[]{source});
+					int destinationDistance = jdbcTemplate.queryForInt(GET_STOP_DETAILS, new Object[]{position});
+					
+					int fare = FARE_RATE * size * (destinationDistance - sourceDistance) / seatsShared;
+					
+					jdbcTemplate.update(DRIVER_UPDATE_USER_FARE, new Object[]{fare, urid});
 				}
 			}
 		} catch (Exception e) {
