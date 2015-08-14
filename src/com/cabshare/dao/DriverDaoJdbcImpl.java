@@ -37,22 +37,53 @@ public class DriverDaoJdbcImpl extends UserDaoJdbcImpl implements DriverDao{
 			
 			//Query for available seats
 			int seatsAvailable = jdbcTemplate.queryForInt(DRIVER_GET_AVAILABLE_SEATS, new Object[]{position, driver.getUsername()});
+			//Adding passengers
 			if (seatsAvailable > 0 /*&& seatsAvailable == driver.getSeats()*/) {   //Confused entity. Shareable???
 				int passengerCount = jdbcTemplate.queryForInt(DRIVER_CHECK_WAITING_PASSENGERS, new Object[]{position, seatsAvailable});
 				if (passengerCount > 0) {
 					//FCFS
 					List<Map<String, Object>> rows = jdbcTemplate.queryForList(DRIVER_COUNT_PASSENGER_SIZE, new Object[]{position, seatsAvailable});
-					for (Map<String, Object> row : rows) {
+					for (Map<String, Object> row : rows) {						
 						int urid = Integer.parseInt(String.valueOf(row.get("urid")));
 						int size = Integer.parseInt(String.valueOf(row.get("size")));
 						
-						if (seatsAvailable == driver.getSeats()) {	//New Ride
-							jdbcTemplate.query(DRIVER_NEW_RIDE, new Object[]{position, driver.getUsername()});;
+						if (seatsAvailable >= size) {
+						
+							if (seatsAvailable == driver.getSeats()) {	//New Ride
+								jdbcTemplate.update(DRIVER_NEW_RIDE, new Object[]{position, driver.getUsername()});
+							}
+							jdbcTemplate.update(DRIVER_UPDATE_SEATS, new Object[]{seatsAvailable - size, driver.getUsername()});
+							seatsAvailable -= size;
+							jdbcTemplate.update(DRIVER_UPDATE_USER, new Object[]{driver.getUsername(), position, urid});
 						}
 					}
 
 				}
 				
+			}
+			
+			//Ending rides
+			//Querying if destination reached
+			int passengersToLeave = jdbcTemplate.queryForInt(DRIVER_CHECK_END_OF_RIDE, new Object[]{position, driver.getUsername()});
+			if (passengersToLeave > 0) {		//People deboarding
+				//Querying the passengers to leave
+				List<Map<String, Object>> rows = jdbcTemplate.queryForList(DRIVER_PASSENGERS_LEAVING, new Object[]{position, driver.getUsername()});
+				for (Map<String, Object> row : rows) {						
+					int urid = Integer.parseInt(String.valueOf(row.get("urid")));
+					int size = Integer.parseInt(String.valueOf(row.get("size")));
+					int urid = Integer.parseInt(String.valueOf(row.get("urid")));
+					int urid = Integer.parseInt(String.valueOf(row.get("urid")));
+					
+					if (seatsAvailable >= size) {
+					
+						if (seatsAvailable == driver.getSeats()) {	//New Ride
+							jdbcTemplate.update(DRIVER_NEW_RIDE, new Object[]{position, driver.getUsername()});
+						}
+						jdbcTemplate.update(DRIVER_UPDATE_SEATS, new Object[]{seatsAvailable - size, driver.getUsername()});
+						seatsAvailable -= size;
+						jdbcTemplate.update(DRIVER_UPDATE_USER, new Object[]{driver.getUsername(), position, urid});
+					}
+				}
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
