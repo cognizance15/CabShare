@@ -28,5 +28,13 @@ public class ApplicationConstants {
 	
 	public static final String DRIVER_COUNT_PASSENGER_SIZE = "select urid, size from userride where source=? and shareable=true and drivername=NULL and size <= ?";
 	
-	public static final String DRIVER_NEW_RIDE = "updatecabride set source=? where drivername=?";
+	public static final String DRIVER_NEW_RIDE = "update cabride set source=? where drivername=?";
+
+	public static final String DRIVER_UPDATE_SEATS = "update cabride set seatsavailable=? where drivername=?";
+	
+	public static final String DRIVER_UPDATE_USER = "update userride set drivername=?, location=?, fare=0 where urid=?";
+	
+	public static final String DRIVER_CHECK_END_OF_RIDE = "select count(*) from userride where destination=? and drivername=? and fare=0";
+	
+	public static final String DRIVER_PASSENGERS_LEAVING = "select urid, username, source, size from userride where destination=? and drivername=? and fare=0";
 }
