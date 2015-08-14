@@ -14,26 +14,16 @@
 		<header>
 			<jsp:include page="header.jsp" ></jsp:include>
 		</header>
-		<div>
-			<form action="driverAction.htm" method="post">
-				<!-- List for set position -->
-				Set Position: 
-				<select name="SelectedStop" id="SelectedStop" > 
-					<% 
-						List stops = (List) session.getAttribute("stopIDs");
-					     for(int i=0; i<stops.size();i++){ 
-					         Integer stop = (Integer)stops.get(i); 
-					     %> 
-					<option value="<%=stop%>"><%=stop%></option> 
-					<%}%> 
-				</select> 
-				<input type="submit" name="set" value="SET"/>
+		<div id="driverPosition">
+			<form action="changeStop.htm" method="post">
+				<input type="text" name= "position" value=${position } readonly="readonly"/><br/>
+				<input type="submit" name="nextStop" value="NEXT STOP"/>
 			</form>
-		</div>
-		
-		
+		</div> 
+
 		<footer>
 			<jsp:include page="footer.jsp"></jsp:include>
 		</footer>
 	</body>
 </html>
+

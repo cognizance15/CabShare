@@ -1,5 +1,9 @@
 package com.cabshare.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cabshare.entity.Driver;
 import com.cabshare.entity.Passenger;
 import com.cabshare.entity.User;
+import com.cabshare.service.DriverService;
 import com.cabshare.service.PassengerService;
 import com.cabshare.service.UserService;
 
@@ -27,6 +33,9 @@ public class UserController {
 	@Qualifier("passService")
 	private PassengerService passService;
 	
+	@Autowired
+	@Qualifier("driverService")
+	private DriverService driverService;
 	
 	@RequestMapping(value="/index.htm")
 	public String goToIndex(){
@@ -73,6 +82,12 @@ public class UserController {
 				if(user.getType().equals("p"))
 					return "homepage";
 				else{
+					User driver = new Driver();
+					driver.setUsername(username);
+					List<Map<String, Object>> liststops = driverService.getStops();
+					httpServletRequest.getSession().setAttribute("liststops", liststops);
+					List<Map<String, Object>> rideInfo = driverService.getRideInfo((Driver)driver);
+					httpServletRequest.getSession().setAttribute("liststops", liststops);
 					return "dhomepage";
 				}
 			}
@@ -124,6 +139,19 @@ public class UserController {
 			if(userType==0){
 				return "homepage";
 			}else{
+				User driver = new Driver();
+				driver.setUsername(username);
+				httpServletRequest.getSession().setAttribute("driver", driver);
+				List<Map<String, Object>> liststops = driverService.getStops();
+				List <Object> stopIDs = new ArrayList<Object>();
+				
+				for (Map<String, Object> row : liststops) {
+					stopIDs.add(row.get("sid"));
+				}
+				System.out.println(stopIDs);
+				httpServletRequest.getSession().setAttribute("stopIDs", stopIDs);
+				/*List<Map<String, Object>> rideInfo = driverService.getRideInfo((Driver)driver);
+				httpServletRequest.getSession().setAttribute("liststops", liststops);*/
 				return "dhomepage";
 			}
 			
@@ -170,8 +198,21 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/driverAction.htm", method=RequestMethod.POST)
-	public String driverAction(){
+	public String driverAction(@RequestParam("SelectedStop") int position,
+			HttpServletRequest httpServletRequest){
 		
-		return null;
+		driverService.setPosition(position, (Driver)httpServletRequest.getSession().getAttribute("driver"));
+		httpServletRequest.setAttribute("position", position);
+		return "driverPosition";
+	}
+	
+	@RequestMapping(value="/changeStop.htm", method=RequestMethod.POST)
+	public String changeStop(@RequestParam("position") Integer position,
+							HttpServletRequest httpServletRequest){
+
+		System.out.println(++position);
+		driverService.nextPosition(position, (Driver)httpServletRequest.getSession().getAttribute("driver"));
+		httpServletRequest.setAttribute("position", position);
+		return "driverPosition";
 	}
 }
