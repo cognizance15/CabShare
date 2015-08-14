@@ -6,8 +6,9 @@ import java.util.Map;
 import com.cabshare.entity.Driver;
 
 public interface DriverDao extends UserDao{
-	boolean setPosition(int position, Driver driver);
-	boolean nextPosition(int position, Driver driver);
-	List<Map<String, Object>>  getStops();
-	List<Map<String, Object>> getRideInfo(Driver driver);
+	public boolean setPosition(int position, Driver driver);
+	public boolean nextPosition(int position, Driver driver);
+	public int getLastStop();
+	public List<Map<String, Object>>  getStops();
+	public List<Map<String, Object>> getRideInfo(Driver driver);
 }

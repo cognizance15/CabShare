@@ -123,6 +123,11 @@ public class DriverDaoJdbcImpl extends UserDaoJdbcImpl implements DriverDao{
 	}
 	
 	@Override
+	public int getLastStop() {
+		return jdbcTemplate.queryForInt(GET_LAST_STOP);
+	}
+	
+	@Override
 	public List<Map<String, Object>> getStops() {
 
 		List<Map<String, Object>> allStops = jdbcTemplate.queryForList(GET_ALL_STOPS);
