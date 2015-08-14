@@ -14,9 +14,16 @@
 		</header>
 		<div>
 			<form action="driverAction.htm" method="post">
-				<input type="button" name="ride" value="1" checked> Next Stop <br>
-				<input type="radio" name="ride" value="2"> Take a Ride<br/>
+				<input type="button" name="ride" value="1" checked> Next Stop <br/>
 				<input type="submit" value="submit"/>
+			</form>
+			
+			<form action="">
+				<!-- List for set position -->
+				Set Position: 
+				<select>
+					<option value=""></option>
+				</select>
 			</form>
 		</div>
 		<footer>
