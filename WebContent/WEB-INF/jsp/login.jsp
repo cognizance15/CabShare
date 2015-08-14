@@ -20,6 +20,8 @@
 			<form action="checkLogin.htm" method="post">
 				Username: <input type="text" name="username" placeholder="Enter your Username"/><br/>
 				Password: <input type="password" name="password" placeholder="********"/><br/>
+				passenger<input type="radio" name="userType" value="0" checked="checked"/>&nbsp;&nbsp;
+				driver<input type="radio" name="userType" value="1"/><br/>
 				<input type="submit" value="LOGIN" />
 			</form>
 		</div>

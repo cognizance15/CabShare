@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 	<head>
 		<link rel="Stylesheet" href="jquery/jquery-ui.css">
@@ -6,7 +6,6 @@
 		<script type="text/javascript" src="jquery/jquery-1.8.3.min.js"></script>
 		<script type="text/javascript" src="jquery/jquery-ui.js"></script>
 		<script type="text/javascript">
-		
 		</script> 
 	</head>
 	<body>
@@ -14,6 +13,10 @@
 			<jsp:include page="header.jsp" ></jsp:include>
 		</header>
 		<div>
+			<c:if test="${usernameNotUnique == false }">
+				<p>* username is already taken</p>
+			</c:if>
+			
 			<form action="save.htm" method="post">
 				UserName: <input type="text" name="username" /><br/>
 				Email: <input type="email" name="email" /><br/>

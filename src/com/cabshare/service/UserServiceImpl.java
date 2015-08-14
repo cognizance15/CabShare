@@ -20,8 +20,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public boolean login(String uname, String password) {
-		return userDao.login(uname, password);
+	public boolean login(String uname, String password, String type) {
+		return userDao.login(uname, password, type);
 	}
 
 	@Override
@@ -32,6 +32,12 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public boolean updateDetails(User user) {
 		return userDao.updateDetails(user);
+	}
+	
+	@Override
+	public boolean validateUsername(String username) {
+		System.out.println("UserServiceImpl.validateUsername()");
+		return userDao.validateUsername(username);
 	}
 
 }

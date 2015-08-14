@@ -1,5 +1,7 @@
 package com.cabshare.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -52,7 +54,7 @@ public class UserController {
 			@RequestParam("email") String email,
 			@RequestParam("password") String password,
 			@RequestParam("userType") int userType,
-			Model model){
+			HttpServletRequest httpServletRequest){
 		
 		User user = new User();
 		if(userType==0){
@@ -60,27 +62,38 @@ public class UserController {
 		}else{
 			user.setType("d");
 		}
-		user.setUsername(username);
-		user.setEmail(email);
-		user.setPassword(password);
-		if(userService.register(user)){
-			model.addAttribute("username", username);
-			return "updateDetails";
+		
+		boolean uniqueness = userService.validateUsername(username);
+		if(uniqueness){
+			user.setUsername(username);
+			user.setEmail(email);
+			user.setPassword(password);
+			if(userService.register(user)){
+				httpServletRequest.getSession().setAttribute("username", username);
+				if(user.getType().equals("p"))
+					return "homepage";
+				else{
+					return "dhomepage";
+				}
+			}
+		}else{
+			httpServletRequest.getSession().setAttribute("usernameNotUnique", true);
 		}
-		model.addAttribute("username", username);
 		return "register";
 	}
 	
 	@RequestMapping(value="/updateDetails.htm", method=RequestMethod.POST)
-	public String updateDetails(@RequestParam("username") String username,
-						@RequestParam("name") String name, 
+	public String updateDetails(@RequestParam("name") String name, 
 						@RequestParam("age") int age,
 						@RequestParam("gender") String gender,
 						@RequestParam("mobile") int mobile,
-						Model model){
+						HttpServletRequest httpServletRequest){
 		System.out.println("UserController.save()");
+		httpServletRequest.getSession();
 		//default annotation handler mapping will pass this request
 		User user = new User();
+		String username = (String)httpServletRequest.getSession().getAttribute("username");
+		System.out.println(username);
 		user.setUsername(username);
 		user.setName(name);
 		user.setAge(age);
@@ -92,22 +105,27 @@ public class UserController {
 		if(userService.updateDetails(user)){
 			return "homepage";
 		}
-		model.addAttribute("saveStatus", false);
 		return "updateDetails";
 	}
 	
 	@RequestMapping(value="/checkLogin.htm", method=RequestMethod.POST)
 	public String checkLogin(@RequestParam("username") String username, 
 						@RequestParam("password") String password,
-						Model model){
-		System.out.println("UserController.goToLogin()");
-		boolean status = userService.login(username, password);
+						@RequestParam("userType") int userType,
+						HttpServletRequest httpServletRequest){
+		String type=userType>0?"d":"p";
+		boolean status = userService.login(username, password, type);
 		//default annotation handler mapping will pass this request
 		if(status){
-			model.addAttribute("username", username);
-			return "homepage";
+			httpServletRequest.getSession().setAttribute("username", username);
+			if(userType==0){
+				return "homepage";
+			}else{
+				return "dhomepage";
+			}
+			
 		}
-		model.addAttribute("loginStatus", false);
+		httpServletRequest.getSession().setAttribute("loginStatus", false);
 		return "login"; 
 	}
 @RequestMapping(value="/takearide.htm", method=RequestMethod.POST)

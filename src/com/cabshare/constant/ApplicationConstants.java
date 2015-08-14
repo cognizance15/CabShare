@@ -6,8 +6,8 @@ public class ApplicationConstants {
 			+ "(username, password,email,usertype)"
 			+ " values(?,?,?,?)";
 	
-	public static final String UPDATE_DETAILS = "update userDetails set name=? age=? gender=? mobile=?"
-			+ "where username=?";
+	public static final String UPDATE_DETAILS = "update userDetails set name=?, age=?, gender=?, mobile=?"
+			+ " where username=?";
 	
 	public static final String INSERT_INTO_USER_RIDE="insert into userride"
 			+ "(username,source,destination)"
@@ -15,7 +15,7 @@ public class ApplicationConstants {
 	
 	public static final String GET_FARE = "select fare from userride where username=?";
 	
-	public static final String USER_LOGIN_CHECK = "select count(*) from userDetails where username=? and password=?";
+	public static final String USER_LOGIN_CHECK = "select count(*) from userDetails where username=? and password=? and userType=?";
 	
 	public static final String VALIDATE_USERNAME = "select count(*) from userDetails where username=?";
 	
