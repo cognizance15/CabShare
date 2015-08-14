@@ -22,16 +22,7 @@ public class UserDaoJdbcImpl implements UserDao {
 	public boolean register(User user) {
 
 		try{
-			/*
-			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("name", user.getName());
-			params.put("username", user.getUsername());
-			params.put("password", user.getPassword());
-			params.put("age", user.getAge());
-			params.put("gender", user.getGender());
-			params.put("email", user.getEmail());
-			params.put("mobNo", user.getMobNo());
-			*/
+			
 			jdbcTemplate.update(INSERT_INTO_USER_DETAILS, new Object[]{
 					user.getUsername(), user.getPassword(),
 					user.getEmail(),user.getType()
@@ -43,6 +34,7 @@ public class UserDaoJdbcImpl implements UserDao {
 		return false;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean login(String username, String password) {
 
