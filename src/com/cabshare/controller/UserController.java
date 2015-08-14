@@ -132,7 +132,7 @@ public class UserController {
 		System.out.println(destination);
 		
 		System.out.println(submit);
-		if(submit==0){
+		if(submit==1){
 			System.out.println("UserController.takeride()");
 			boolean status = passService.takeRide(passenger);
 			model.addAttribute(passenger);
@@ -141,7 +141,7 @@ public class UserController {
 				return "ontrip";
 			}
 			
-		}else if(submit==1){
+		}else if(submit==0){
 			System.out.println("UserController.joinride()");
 			boolean status = passService.joinRide(passenger);
 			model.addAttribute(passenger);
