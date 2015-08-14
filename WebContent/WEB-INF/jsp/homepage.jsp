@@ -13,7 +13,7 @@
 			<jsp:include page="header.jsp" ></jsp:include>
 		</header>
 		<div>
-			<form action="takearide.htm" method="post">
+			<form action="takearide.htm" method="get">
 
 
 				Source: <input type="text" name="source"placeholder="Enter Pickup location" /><br /> 

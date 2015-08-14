@@ -159,7 +159,7 @@ public class UserController {
 		httpServletRequest.getSession().setAttribute("loginStatus", false);
 		return "login"; 
 	}
-@RequestMapping(value="/takearide.htm", method=RequestMethod.POST)
+@RequestMapping(value="/takearide.htm", method=RequestMethod.GET)
 	public String takearide(@RequestParam("source") int source, 
 						@RequestParam("destination") int destination,
 						@RequestParam("ride") int submit,
@@ -180,7 +180,7 @@ public class UserController {
 			model.addAttribute(passenger);
 			System.out.println(status);
 			if(status){
-				return "ontrip";
+				return "redirect:onroad.htm";
 			}
 			
 		}else if(submit==0){
@@ -189,12 +189,17 @@ public class UserController {
 			model.addAttribute(passenger);
 			System.out.println(status);
 			if(status){
-				return "joinride";
+				return "redirect:onroad.htm";
 			}
 
 		}
 
 		return "homepage"; 
+	}
+
+	@RequestMapping(value="/onroad.htm")
+	public String goToOnroad(){
+		return "onroad";
 	}
 	
 	@RequestMapping(value="/driverAction.htm", method=RequestMethod.POST)
