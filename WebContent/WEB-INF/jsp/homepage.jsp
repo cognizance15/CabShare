@@ -12,7 +12,16 @@
 		<header>
 			<jsp:include page="header.jsp" ></jsp:include>
 		</header>
-		
+		<div>
+			<form action="takearide.htm" method="post">
+				Source: <input type="text" name="source"
+					placeholder="Enter Pickup location" /><br /> Destination: <input
+					type="text" name="destination" placeholder="Enter Destination" /><br />
+				<input type="radio" name="ride" value="1" checked> Join a Ride <br>
+				<input type="radio" name="ride" value="2"> Take a Ride<br/>
+				<input type="submit" value="submit"/>
+			</form>
+		</div>
 		<footer>
 			<jsp:include page="footer.jsp"></jsp:include>
 		</footer>

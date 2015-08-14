@@ -36,10 +36,10 @@ public class UserDaoJdbcImpl implements UserDao {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public boolean login(String username, String password) {
+	public boolean login(String username, String password, String type) {
 
 		try{
-			int count = jdbcTemplate.queryForInt(USER_LOGIN_CHECK, new Object[]{username,password});
+			int count = jdbcTemplate.queryForInt(USER_LOGIN_CHECK, new Object[]{username,password, type});
 			System.out.println(count);
 			if(count==1)
 				return true;
@@ -64,16 +64,17 @@ public class UserDaoJdbcImpl implements UserDao {
 	@Override
 	public boolean validateUsername(String username) {
 
+		System.out.println("UserDaoJdbcImpl.validateUsername()");
 		try{
-			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("username", username);
-			int count = jdbcTemplate.queryForInt(CHECK_USERNAME, params);
-			if(count==0)
-				return true;
+			int count = jdbcTemplate.queryForInt(CHECK_USERNAME, username);
+			System.out.println(count);
+			if(count>0)
+				return false;
 		}catch(Exception e){
 			e.printStackTrace();
+			System.out.println(12);
 		}
-		return false;
+		return true;
 	}
 	
 	@Override

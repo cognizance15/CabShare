@@ -6,10 +6,12 @@ public class ApplicationConstants {
 			+ "(username, password,email,usertype)"
 			+ " values(?,?,?,?)";
 	
-	public static final int FARE_RATE = 10;
+	public static final String UPDATE_DETAILS = "update userDetails set name=?, age=?, gender=?, mobile=?"
+			+ " where username=?";
+
+public static final int FARE_RATE = 10;
 	
-	public static final String UPDATE_DETAILS = "update userDetails set name=? age=? gender=? mobile=?"
-			+ "where username=?";
+	
 	
 	public static final String INSERT_INTO_USER_RIDE="insert into userride"
 			+ "(username,source,destination,shareable,size)"
@@ -17,7 +19,7 @@ public class ApplicationConstants {
 	
 	public static final String GET_FARE = "select fare from userride where username=?";
 	
-	public static final String USER_LOGIN_CHECK = "select count(*) from userDetails where username=? and password=?";
+	public static final String USER_LOGIN_CHECK = "select count(*) from userDetails where username=? and password=? and userType=?";
 	
 	public static final String VALIDATE_USERNAME = "select count(*) from userDetails where username=?";
 	
@@ -25,7 +27,9 @@ public class ApplicationConstants {
 	
 	public static final String CHECK_USERNAME = "select count(*) from userDetails where username=?";
 
-	public static final String DRIVER_NEXT_LOCATION = "update cabride set location=? where drivername=? and fare=0";
+	public static final String DRIVER_NEXT_LOCATION = "update cabride set location=? where drivername=?";
+	
+	public static final String DRIVER_SET_LOCATION = "update cabride set location=?, source=NULL, destination=NULL, shareable=NULL, seatsavailable=? where drivername=?";
 	
 	public static final String DRIVER_GET_AVAILABLE_SEATS = "select seatsavailable from cabride where drivername=?";
 	
