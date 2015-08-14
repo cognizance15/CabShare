@@ -1,8 +1,8 @@
 package com.cabshare.entity;
 
 public class Passenger extends User{
-	private String source;
-	private String Destination;
+	private int source;
+	private int Destination;
 	private int fare;
 	
 	public Passenger() {
@@ -15,20 +15,20 @@ public class Passenger extends User{
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getSource() {
+	public int getSource() {
 		return source;
 	}
 
-	public void setSource(String source) {
-		this.source = source;
+	public void setSource(int source2) {
+		this.source = source2;
 	}
 
-	public String getDestination() {
+	public int getDestination() {
 		return Destination;
 	}
 
-	public void setDestination(String destination) {
-		Destination = destination;
+	public void setDestination(int destination2) {
+		Destination = destination2;
 	}
 
 	public int getFare() {

@@ -7,8 +7,10 @@ public class ApplicationConstants {
 			+ " values(?,?,?,?,?,?,?)";
 	
 	public static final String INSERT_INTO_USER_RIDE="insert into userride"
-			+ "(username,source,destination,size)"
-			+ " values(?,?,?,?)";
+			+ "(username,source,destination)"
+			+ " values(?,?,?)";
+	
+	public static final String GET_FARE = "select fare from userride where username=?";
 	
 	public static final String USER_LOGIN_CHECK = "select count(*) from userDetails where username=? and password=?";
 	
