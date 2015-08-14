@@ -117,6 +117,7 @@ public class UserController {
 						HttpServletRequest httpServletRequest){
 		String type=userType>0?"d":"p";
 		boolean status = userService.login(username, password, type);
+		passenger.setUsername(username);
 		//default annotation handler mapping will pass this request
 		if(status){
 			httpServletRequest.getSession().setAttribute("username", username);
