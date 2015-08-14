@@ -10,8 +10,8 @@ public class ApplicationConstants {
 			+ "where username=?";
 	
 	public static final String INSERT_INTO_USER_RIDE="insert into userride"
-			+ "(username,source,destination)"
-			+ " values(?,?,?)";
+			+ "(username,source,destination,shareable,size)"
+			+ " values(?,?,?,?,?)";
 	
 	public static final String GET_FARE = "select fare from userride where username=?";
 	

@@ -111,6 +111,7 @@ public class UserController {
 		//default annotation handler mapping will pass this request
 		if(status){
 			model.addAttribute("username", username);
+			passenger.setUsername(username);
 			return "homepage";
 		}
 		model.addAttribute("loginStatus", false);
