@@ -46,7 +46,13 @@ public class UserController {
 		System.out.println("UserController.save()");
 		//default annotation handler mapping will pass this request
 		User user = new User(name, username, password, email, mobile, age, gender);
-		//passenger=new Passenger(name, username, password, email, mobile, age, gender);
+		passenger.setAge(age);
+		passenger.setEmail(email);
+		passenger.setGender(gender);
+		passenger.setName(username);
+		passenger.setUsername(username);
+		passenger.setPassword(password);
+		
 		model.addAttribute(user);
 		System.out.println(user);
 		if(userService.register(user)){
@@ -75,12 +81,14 @@ public class UserController {
 	public String takearide(@RequestParam("source") int source, 
 						@RequestParam("destination") int destination,
 						@RequestParam("ride") int submit,
+						@RequestParam("size") int size,
 						Model model){
 		
 		passenger.setDestination(destination);
 		passenger.setSource(source);
+		passenger.setSize(size);
 		System.out.println(submit);
-		if(submit==1){
+		if(submit==0){
 			System.out.println("UserController.takeride()");
 			boolean status = passService.takeRide(passenger);
 			model.addAttribute(passenger);
@@ -89,7 +97,7 @@ public class UserController {
 				return "ontrip";
 			}
 			
-		}else if(submit==2){
+		}else if(submit==1){
 			System.out.println("UserController.joinride()");
 			boolean status = passService.joinRide(passenger);
 			model.addAttribute(passenger);
