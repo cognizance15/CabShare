@@ -4,6 +4,8 @@ public class Passenger extends User{
 	private int source;
 	private int Destination;
 	private int fare;
+	private int size;
+	
 	
 	public Passenger() {
 		// TODO Auto-generated constructor stub
@@ -37,6 +39,14 @@ public class Passenger extends User{
 
 	public void setFare(int fare) {
 		this.fare = fare;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
 	}
 	
 	

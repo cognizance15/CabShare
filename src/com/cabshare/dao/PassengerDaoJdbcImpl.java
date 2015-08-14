@@ -1,7 +1,7 @@
 package com.cabshare.dao;
 
-import static com.cabshare.constant.ApplicationConstants.INSERT_INTO_USER_RIDE;
 import static com.cabshare.constant.ApplicationConstants.GET_FARE;
+import static com.cabshare.constant.ApplicationConstants.INSERT_INTO_USER_RIDE;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,6 +25,7 @@ public class PassengerDaoJdbcImpl extends UserDaoJdbcImpl implements PassengerDa
 
 	
 
+	@SuppressWarnings("unused")
 	@Override
 	public boolean updateFare(Passenger passenger) {
 		try{
@@ -42,7 +43,7 @@ public class PassengerDaoJdbcImpl extends UserDaoJdbcImpl implements PassengerDa
 		try{
 			
 			jdbcTemplate.update(INSERT_INTO_USER_RIDE, new Object[]{
-					passenger.getUsername(),passenger.getSource(),passenger.getDestination()});
+					passenger.getUsername(),passenger.getSource(),passenger.getDestination(),"1",passenger.getSize()});
 			return true;
 		}catch(Exception e){
 			e.printStackTrace();

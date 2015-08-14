@@ -1,7 +1,7 @@
 package com.cabshare.service;
 
 import com.cabshare.dao.DriverDaoJdbcImpl;
-import com.cabshare.entity.User;
+import com.cabshare.entity.Driver;
 
 public class DriverService {
 	private DriverDaoJdbcImpl driverDaoJdbcImpl;
@@ -9,9 +9,9 @@ public class DriverService {
 		driverDaoJdbcImpl = new DriverDaoJdbcImpl();
 	}
 
-	public boolean setPosition(String position) {
+	public boolean nextPosition(int position, Driver driver) {
 		try {
-			driverDaoJdbcImpl.setPosition(position);
+			driverDaoJdbcImpl.nextPosition(position, driver);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();;
@@ -19,24 +19,13 @@ public class DriverService {
 		return false;
 	}
 	
-	public boolean beginRide(User user){
+	public boolean setPosition(int position, Driver driver) {
 		try {
-			driverDaoJdbcImpl.beginRide(user);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-	
-	public boolean endRide(User user) {
-		try {
-			driverDaoJdbcImpl.endRide(user);
+			driverDaoJdbcImpl.setPosition(position, driver);
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.printStackTrace();;
 		}
 		return false;
 	}
-	
-	
 }
