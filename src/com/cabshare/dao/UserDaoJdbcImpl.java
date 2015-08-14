@@ -14,6 +14,7 @@ import com.cabshare.entity.User;
 @Repository(value="userDao")
 public class UserDaoJdbcImpl implements UserDao {
 
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
@@ -23,8 +24,9 @@ public class UserDaoJdbcImpl implements UserDao {
 		try{
 			
 			jdbcTemplate.update(INSERT_INTO_USER_DETAILS, new Object[]{
-					user.getName(),user.getUsername(), user.getPassword(),
-					user.getAge(),user.getGender(),user.getEmail(),user.getMobNo()});
+					user.getUsername(), user.getPassword(),
+					user.getEmail(),user.getType()
+					});
 			return true;
 		}catch(Exception e){
 			e.printStackTrace();
@@ -76,7 +78,16 @@ public class UserDaoJdbcImpl implements UserDao {
 	
 	@Override
 	public boolean updateDetails(User user) {
-		// TODO Auto-generated method stub
+
+		try{
+			jdbcTemplate.update(UPDATE_DETAILS, new Object[]{user.getName(), user.getAge(),
+															user.getGender(), user.getMobNo(),
+															user.getUsername()
+															});
+			return true;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return false;
 	}
 
