@@ -57,7 +57,7 @@ FOREIGN KEY (destination) REFERENCES stops(sid),
 shareable boolean,
 size int,
 drivername varchar(50),
-FOREIGN KEY (drivername) REFERENCES driverdetails(drivername),	#On Take/Join Ride
+FOREIGN KEY (drivername) REFERENCES userdetails(username),	#On Take/Join Ride
 location int,
 FOREIGN KEY (location) REFERENCES stops(sid),
 fare int
