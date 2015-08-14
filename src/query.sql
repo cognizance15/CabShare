@@ -77,6 +77,6 @@ location int,
 FOREIGN KEY (location) REFERENCES stops(sid)
 );
 insert into cabride(crid,shareable,seatsavailable,drivername) values(1002, 1, 5, "mkumar");
-insert into cabride(crid,shareable,seatsavailable,drivername) values(1002, 1, 5, "mrathi");
-insert into cabride(crid,shareable,seatsavailable,drivername) values(1002, 1, 5, "mgupta");
-insert into cabride(crid,shareable,seatsavailable,drivername) values(1002, 1, 5, "mlohani");
+insert into cabride(crid,shareable,seatsavailable,drivername) values(1003, 1, 5, "mrathi");
+insert into cabride(crid,shareable,seatsavailable,drivername) values(1004, 1, 5, "mgupta");
+insert into cabride(crid,shareable,seatsavailable,drivername) values(1005, 1, 5, "mlohani");
