@@ -2,16 +2,17 @@ CREATE TABLE userdetails(
 name varchar(50),
 username varchar(50) PRIMARY KEY,
 password varchar(50),
+userType varchar(10),
 age int,
 gender varchar(50),
 email varchar(50),
 mobile BIGINT(10)
 );
-insert into userdetails(name,username,password,age,gender,email,mobile) values("Danish","Danish123","Danish123",22,"MALE","tux.danish@gmail.com",8826296990);
-insert into userdetails(name,username,password,age,gender,email,mobile) values("mayank","mayank123","mayank123",21,"MALE","mayank.kumar@gmail.com",8813338990);
-insert into userdetails(name,username,password,age,gender,email,mobile) values("pardha","pardha123","pardha123",22,"MALE","pardha@gmail.com",8872494210);
-insert into userdetails(name,username,password,age,gender,email,mobile) values("safiyat","safiyat123","safiyat123",21,"MALE","safiyat.reza@gmail.com",8826299090);
-insert into userdetails(name,username,password,age,gender,email,mobile) values("tux","tux123","tux123",22,"MALE","tux@gmail.com",8872973160);
+insert into userdetails(name,username,password,userType,age,gender,email,mobile) values("Danish","Danish123","Danish123","d",22,"MALE","tux.danish@gmail.com",8826296990);
+insert into userdetails(name,username,password,userType,age,gender,email,mobile) values("mayank","mayank123","mayank123","p",21,"MALE","mayank.kumar@gmail.com",8813338990);
+insert into userdetails(name,username,password,userType,age,gender,email,mobile) values("pardha","pardha123","pardha123","p",22,"MALE","pardha@gmail.com",8872494210);
+insert into userdetails(name,username,password,userType,age,gender,email,mobile) values("safiyat","safiyat123","safiyat123","p",21,"MALE","safiyat.reza@gmail.com",8826299090);
+insert into userdetails(name,username,password,userType,age,gender,email,mobile) values("tux","tux123","tux123","p",22,"MALE","tux@gmail.com",8872973160);
 
 
 
