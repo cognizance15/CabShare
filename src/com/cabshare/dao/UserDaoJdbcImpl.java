@@ -41,6 +41,7 @@ public class UserDaoJdbcImpl implements UserDao {
 		return false;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean login(String username, String password) {
 
