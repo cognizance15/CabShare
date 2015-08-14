@@ -76,3 +76,7 @@ FOREIGN KEY (drivername) REFERENCES driverdetails(drivername),	#On Take/Join Rid
 location int,
 FOREIGN KEY (location) REFERENCES stops(sid)
 );
+insert into cabride(crid,shareable,seatsavailable,drivername) values(1002, 1, 5, "Mayank kumar");
+insert into cabride(crid,shareable,seatsavailable,drivername) values(1002, 1, 5, "Mayank Rathi");
+insert into cabride(crid,shareable,seatsavailable,drivername) values(1002, 1, 5, "Mayank gupta");
+insert into cabride(crid,shareable,seatsavailable,drivername) values(1002, 1, 5, "Mayank Lohani");
