@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +25,7 @@ public class UserController {
 	@Qualifier("passService")
 	private PassengerService passService;
 	
-	
+	private Passenger passenger= new Passenger();
 
 	
 	@RequestMapping(value="/register.htm")
@@ -47,7 +46,8 @@ public class UserController {
 		System.out.println("UserController.save()");
 		//default annotation handler mapping will pass this request
 		User user = new User(name, username, password, email, mobile, age, gender);
-		Passenger passenger = new Passenger(name, username, password, email, mobile, age, gender);
+		//passenger=new Passenger(name, username, password, email, mobile, age, gender);
+		model.addAttribute(user);
 		System.out.println(user);
 		if(userService.register(user)){
 			return "homepage";
@@ -74,15 +74,32 @@ public class UserController {
 	@RequestMapping(value="/takearide.htm", method=RequestMethod.POST)
 	public String takearide(@RequestParam("source") int source, 
 						@RequestParam("destination") int destination,
-						ModelMap model){
-		System.out.println("UserController.takeride()");
+						@RequestParam("ride") int submit,
+						Model model){
 		
-		boolean status = passService.takeRide(source, destination);
-		
-		if(status){
-			return "homepage";
+		passenger.setDestination(destination);
+		passenger.setSource(source);
+		System.out.println(submit);
+		if(submit==1){
+			System.out.println("UserController.takeride()");
+			boolean status = passService.takeRide(passenger);
+			model.addAttribute(passenger);
+			System.out.println(status);
+			if(status){
+				return "ontrip";
+			}
+			
+		}else if(submit==2){
+			System.out.println("UserController.joinride()");
+			boolean status = passService.joinRide(passenger);
+			model.addAttribute(passenger);
+			System.out.println(status);
+			if(status){
+				return "joinride";
+			}
+
 		}
-		return "login"; 
+		return "homepage"; 
 	}
 	
 	
