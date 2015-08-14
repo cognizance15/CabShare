@@ -52,4 +52,6 @@ public class ApplicationConstants {
 	public static final String GET_STOP_DETAILS = "select distance from stops where sid=?";
 	
 	public static final String DRIVER_UPDATE_USER_FARE = "update userride set fare=? where urid=?";
+	
+	public static final String GET_LAST_STOP = "select * from stops where urid=(select MAX(sid) from stops)";
 }
