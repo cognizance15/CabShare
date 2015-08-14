@@ -127,6 +127,10 @@ public class UserController {
 		passenger.setDestination(destination);
 		passenger.setSource(source);
 		passenger.setSize(size);
+		System.out.println(size);
+		System.out.println(source);
+		System.out.println(destination);
+		
 		System.out.println(submit);
 		if(submit==0){
 			System.out.println("UserController.takeride()");

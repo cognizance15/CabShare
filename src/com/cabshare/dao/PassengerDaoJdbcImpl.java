@@ -42,7 +42,7 @@ public class PassengerDaoJdbcImpl extends UserDaoJdbcImpl implements PassengerDa
 		try{
 			
 			jdbcTemplate.update(INSERT_INTO_USER_RIDE, new Object[]{
-					passenger.getUsername(),passenger.getSource(),passenger.getDestination()});
+					passenger.getUsername(),passenger.getSource(),passenger.getDestination(),"1",passenger.getSize()});
 			return true;
 		}catch(Exception e){
 			e.printStackTrace();
